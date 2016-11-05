@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  guid: MyString
+  total: 9.99
+  status: 1
+  confirmation_sent: false
+  note: MyText
+  stripe_order_id: MyString
+  user_id: 
+  fulfillment_options_id: 
+
+two:
+  guid: MyString
+  total: 9.99
+  status: 1
+  confirmation_sent: false
+  note: MyText
+  stripe_order_id: MyString
+  user_id: 
+  fulfillment_options_id: 
