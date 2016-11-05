@@ -1,4 +1,5 @@
 ActiveAdmin.register Sale do
+  permit_params :guid, :total, :status, :confirmation_sent, :note, :stripe_order_id
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
