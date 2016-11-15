@@ -36,8 +36,7 @@
               = image_tag product.image.thumb, class: "circle"
               %span.title
                 = product.name
-                :plain 
-                  :
+              %p
                 = number_to_currency(product.price)
               =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
