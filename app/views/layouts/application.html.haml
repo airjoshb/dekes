@@ -35,8 +35,13 @@
               = @products.first.menu.titleize
             - for product in @products
               %li
-                = link_to product.name, "#"
-          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => "#"}
+                =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb, no_turbolink: true)} do 
+                  %i.material-icons.small.waves-effect add-circle
+                  =product.name
+                  :plain
+                    :
+                  =product.price
+          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => "#", data: {no_turbolink: true}}
             Order
         %ul#nav-mobile.contact.right.hide-on-small-only
           %li.address

@@ -13,11 +13,11 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require materialize-sprockets
 //= require cocoon
 //= require_tree .
 
+//= require turbolinks
 
 $('.registrations').ready(function() {
   $.externalScript('https://js.stripe.com/v2/').done(function(script, textStatus) {
