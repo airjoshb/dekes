@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+  resources :products
+  resources :sales
   root 'visitors#index'
 
   # Example of regular route:
@@ -60,6 +62,11 @@ Rails.application.routes.draw do
   #   end
   
   #->Prelang (user_login:devise/stylized_paths)
+  
+  resource :cart, only: [:show] do
+    put 'add/:product_id', to: 'carts#add', as: :add_to
+    put 'remove/:item_id', to: 'carts#remove', as: :remove_from
+  end
   devise_scope :user do
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session
@@ -70,5 +77,7 @@ Rails.application.routes.draw do
     put    "signup"  => "users/registrations#update", as: :update_user_registration
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
+  
+  mount_griddler
 
 end

@@ -1,0 +1,19 @@
+.section
+  .container
+    .row
+      - for product in @products
+        .col.s12.m4
+          .card.z-depth-2.card-product.hoverable
+            .card-media
+              = link_to image_tag(product.image), product
+              .card-data
+                .card-title
+                  = link_to product do
+                    %h3.card-title-text= product.name
+                %span.description= product.description
+            .card-actions
+              %strong.product-price
+                = number_to_currency(product.price)
+              %a.waves-effect.lime
+              =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
+                %i.material-icons.small.waves-effect shopping_basket

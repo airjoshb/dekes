@@ -1,0 +1,6 @@
+%ul.collection
+  %li.collection-item.avatar.cart-line_item
+    = image_tag item.fourth, class: "circle"
+    %span.title
+      = item.third
+    %p.secondary-content= number_to_currency(item.second)

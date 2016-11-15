@@ -1,3 +1,71 @@
-// Place all the styles related to the Visitors controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "materialize/components/color";
+$primary-color: color("blue", "darken-4") !default;
+$secondary-color: color("lime", "") !default;
+@import 'materialize';
+.contact { color: $primary-color; }
+.navbar-material .nav-wrapper .brand-logo img {
+  height: 64px;
+}
+
+nav ul a { color: $primary-color; }
+.parallax-container {
+  min-height: 380px;
+  line-height: 0;
+  height: auto;
+  color: rgba(255, 255, 255, .9);
+  .section {width: 100%;}
+}
+nav .button-collapse {height: 40px; text-align: center; margin-top: 8px; }
+.card { height: 400px;  }
+.card-media { overflow: hidden; height: 362px; position: relative;}
+.card .card-media img {
+max-height: 140%;
+width: auto;
+border-left: 50%;
+margin-left: -50%;
+}
+.card-data { 
+  bottom: 0; 
+  height: 45%;
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  z-index: 3;
+  color: white;  
+  background: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .4) 100%);
+  padding: 10px;
+  .description { font-size: 1rem; line-height: 10px;}
+}
+h3.card-title-text {font-size: 1.8rem; color: white; }
+.card-actions {
+display: -webkit-flex;
+display: flex;
+box-sizing: border-box;
+-webkit-align-items: center;
+align-items: center;
+-webkit-justify-content: space-between;
+justify-content: space-between;
+padding: 2px 5px 0; 
+font-size: 24px;
+line-height: 32px;
+
+}
+.product-price {
+font-weight: 400;
+}
+.text-depth {
+text-shadow: 2px 2px rgba(0, 0, 0, 0.34);
+}
+#cart-background {
+  position: absolute; 
+  top: 0;
+  left: 0;
+}
+.collection .collection-item.avatar {min-height: 64px; }
+#cart .card, #registration .card { height: auto; }
+#cart ul { border: none; }
+.inline { display: inline-block; }
+label { display: block; }
+.controls { margin-right: 20px; }
+select { display: block; }

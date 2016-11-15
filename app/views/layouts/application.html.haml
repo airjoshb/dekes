@@ -1,12 +1,34 @@
 !!!
 %html
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
+
     %title Dekes
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    
     = csrf_meta_tags
     / Prelang: Analytics / Google Analytics
     = analytics_init if Rails.env.production? or Rails.env.development?
-  %body
+  %body{:class => "#{controller_name} #{action_name}"}
+    %nav.navbar-material.white{:role => "navigation"}
+      .nav-wrapper
+        = link_to image_tag("dekes-market-deli-logo.png"), root_url, id: "logo-container", class: "brand-logo center"
+        - unless controller.controller_name == "registrations"
+          %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
+            %h5 Add to Cart
+            - for product in @products
+              %li
+                = link_to product.name, "#"
+          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => "#"}
+            Order
+        %ul#nav-mobile.contact.right.hide-on-small-only
+          %li.address
+            %a 334 7th Ave, Santa Cruz
+          %li.phone-number
+            %a 831-476-5897 
     = yield
+
+    :javascript
+      $(".button-collapse").sideNav();

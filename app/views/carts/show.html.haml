@@ -1,0 +1,51 @@
+#cart.section
+  .container
+    .row
+      .col.s12.m5.card.hide-on-small-only
+        %h5.center Add More
+        %ul.collection
+          - for product in @products
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title= product.name
+              %p.product-price
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+      .col.s12.m7#mycart
+        %h3.center Basket
+        - if @cart_line_items.blank?
+          %h5 Add some sandwiches to your cart!
+        - else
+          %ul.collection
+            - for item in @cart_line_items
+              %li.collection-item.avatar.cart-line_item
+                = image_tag item.fourth, class: "circle"
+                %span.title
+                  = item.third
+                %p= number_to_currency(item.second)
+
+                .secondary-content
+                  = link_to "", data: { targetUrl: remove_from_cart_path(item.last)}, id: item.last, class: "remove" do
+                    %i.material-icons close
+      .col.s12.m5.lime.lighten-5.hide-on-med-and-up
+        %h5.center Add More
+        %ul.collection
+          - for product in @products
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title
+                = product.name
+                :plain 
+                  :
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+    
+    .row
+      .col.s12.m3.right
+        - if @cart_line_items.present?
+          .right
+            = render 'subtotal', :locals => ( subtotal = @subtotal )
+            = link_to "Checkout", new_user_registration_path, class: "btn btn-large lime right", type: "button"
+      

@@ -1,0 +1,17 @@
+.card-title
+  Payment Info
+- if @user.stripe_token
+  %p Credit card acceptance is pending.
+- else
+  .field
+    = text_field_tag :card_number, nil, name: nil, :placeholder => "Credit Card Number"
+  .controls.inline
+    %label.string.required.control-label{:for => "card-expiry-month"}
+      Expiration Date
+    %input.string.required.pull-left#card_month{name: nil, :style => "width: 25px;", :size => "2", :type => "text", :placeholder => "MM"}
+    %input.string.required#card_year{name: nil, :style => "width: 37px;", :size => "4", :type => "text", :placeholder => "YYYY"}
+
+  .controls.inline
+    %label.string.required.control-label{:for => "card-cvv"}
+      Security Code
+    = text_field_tag :card_code, nil, name: nil, :placeholder => "CVV", :autocomplete => :off, :size => 20, :style => "width: 37px;", :hint => "This 3- or 4-digit code is usually found on the back of your credit card", html: { class: "inline" }

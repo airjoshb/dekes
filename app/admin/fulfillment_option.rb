@@ -1,4 +1,4 @@
-ActiveAdmin.register FulfillmentOptions do
+ActiveAdmin.register FulfillmentOption do
   permit_params :name
 
 # See permitted parameters documentation:

@@ -1,0 +1,8 @@
+Address
+.nested-fields
+  = p.input :address1, :class => "required", :placeholder => "Address Line 1", label: false
+  = p.input :address2, :placeholder => "Address Line 2", label: false
+  = p.input :city, :placeholder => "City", :class => "required", label: false
+  = p.input :state,  collection: us_states, :class => "required", prompt: "State", label: false
+  = p.input :zip, :placeholder => "Zip Code", :class => "required", label: false
+  = link_to_remove_association "remove address", f

@@ -1,7 +1,62 @@
-.row
-  .col.s12.m6
-    .card
-      .card-content
-        .card-title
-          %h1 Visitors#index
-        %p Find me in app/views/visitors/index.html.erb
+#index-banner.parallax-container
+  .section.no-pad-bot
+    .container
+      .header.center.col.s8
+        %h1 
+          Deke's Market & 
+          %br
+          In Mah' Belly Deli
+      .row.center
+        %h5.header.col.s12.light 
+          The best sandwiches in Santa Cruz. 
+      .row.center
+        = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime"
+  .parallax
+    = image_tag "dekes-sandwich-shop.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Deke's Sandwich Shop & Market"
+.container
+  .section
+    .row
+      .col.s12.m4
+        %h5.center Breakfast
+        %p Serving coffee and breakfast from 7 am until 11 am. Order online and pick up on your way to work. Slept in? Why wait, order and have it delivered in the Twin Lakes area.
+      .col.s12.m4
+        %h5.center Lunch
+        %p Serving fresh made sandwiches for lunch from 11 am to 3 pm. Order online and get it delivered to Twin Lakes beach, or get notified when it is ready and come pick it up.
+      .col.s12.m4
+        %h5.center Snacks & Drinks
+        %p Why have just a sandwich? We've selected our most popular snacks and candy as well as drinks for all pick up and delivery orders.
+.parallax-container.valign-wrapper
+  .section.no-pad-bot
+    .container
+      .row.center
+        %h3.header.light.text-depth
+          Order online and pick up or have it delivered to the beach at Twin Lakes.
+  .parallax
+    = image_tag "west-coast-reuben-sandwich.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Order sandwiches online."
+.container
+  .section
+    .row
+      .col.s12.m4
+        %h5.center Groceries
+        %p A selection of everything you need for a great day at the beach, a quick run on the way home from work, or for a weekend getaway.
+      .col.s12.m4
+        %h5.center Wine
+        %p We have over 100 wines to choose from.
+      .col.s12.m4
+        %h5.center Beer
+        %p Our extensive beer selection will be perfect for a day on the beach, a barbecue or with one of our delicious fresh made sandwiches.
+.parallax-container.valign-wrapper
+  .section.no-pad-bot
+    .container
+      .row.center
+        %h3.header.light.text-depth
+          Open from 7 am to 9 pm 
+          %br
+          for groceries, wine and beer.
+  .parallax
+    = image_tag "groceries-beer-wine-twin-lakes-beach.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Groceries, beer and wine"         
+:javascript
+  $(document).ready(function(){
+    $('.parallax').parallax();
+  });
+        

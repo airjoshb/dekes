@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.7'
+
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0'
 gem 'materialize-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -17,16 +17,17 @@ gem 'coffee-rails', '~> 4.0.0'
 
 gem 'stripe'
 gem 'stripe_event', '~> 1.1.0'
-gem 'redis', '~> 3.0.1'
+gem 'redis', '~>3.2'
 gem 'carrierwave'
 gem 'mini_magick'
 gem 'haml-rails'
-gem 'gibbon'
 gem 'friendly_id', '~> 5.1.0'
 gem 'geocoder'
 gem 'geoip'
 gem 'griddler'
 gem 'griddler-sendgrid'
+gem 'simple_form'
+gem 'cocoon'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -52,6 +53,8 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'rails_12factor', group: :production
+
 gem 'bundler'
 
 gem 'activeadmin', github: 'gregbell/active_admin'
@@ -61,3 +64,5 @@ gem 'omniauth-facebook'
 gem 'google-analytics-rails'
 gem 'tzinfo-data'
 gem 'validates_formatting_of'
+
+ruby "2.2.5"

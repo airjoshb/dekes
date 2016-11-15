@@ -9,9 +9,11 @@ class ApplicationController < ActionController::Base
 
   #->Prelang (user_login:devise)
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up)        { |u| u.permit(:username, :email, :password, :password_confirmation, :remember_me) }
-    devise_parameter_sanitizer.for(:sign_in)        { |u| u.permit(:login, :username, :email, :password, :remember_me) }
-    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:username, :email, :password, :password_confirmation, :current_password) }
+    devise_parameter_sanitizer.permit(:sign_up) do |user|
+      user.permit(:username, :email, :password, :password_confirmation, :remember_me, :address_id, address_attributes: [:address1, :address2, :city, :state, :zip, :id])
+    end
+    devise_parameter_sanitizer.permit(:sign_in, keys: [:username, :email, :password, :password_confirmation, :remember_me, :address_id, address_attributes: [:address1, :address2, :city, :state, :zip, :id]])
+    devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :remember_me,:address_id, address_attributes: [:address1, :address2, :city, :state, :zip, :id]])
   end
 
 
