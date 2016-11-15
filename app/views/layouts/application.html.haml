@@ -21,7 +21,7 @@
     %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am  and fresh made sandwiches for lunch. Order online with pickup or delivery to Twin Lakes beach.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true, async: true
     = csrf_meta_tags
     = analytics_init if Rails.env.production? or Rails.env.development?
   %body{:class => "#{controller_name} #{action_name}"}
