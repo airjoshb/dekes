@@ -1,15 +1,28 @@
 !!!
-%html
+%html{itemscope: true, itemtype: content_for?(:html) ? yield(:html) : "http://schema.org/WebPage", lang: "en"}
   %head
-    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
+    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches and Catering in Santa Cruz - Deke's Market & Deli"
+    = favicon_link_tag 'ico/favicon.ico'
+    %link{href: "ico/apple-touch-icon.png", rel: "apple-touch-icon"}
+    %link{href: "ico/apple-touch-icon-57x57.png", rel: "apple-touch-icon", sizes: "57x57"}
+    %link{href: "ico/apple-touch-icon-60x60.png", rel: "apple-touch-icon", sizes: "60x60"}
+    %link{href: "ico/apple-touch-icon-72x72.png", rel: "apple-touch-icon", sizes: "72x72"}
+    %link{href: "ico/apple-touch-icon-76x76.png", rel: "apple-touch-icon", sizes: "76x76"}
+    %link{href: "ico/apple-touch-icon-114x114.png", rel: "apple-touch-icon", sizes: "114x114"}
+    %link{href: "ico/apple-touch-icon-120x120.png", rel: "apple-touch-icon", sizes: "120x120"}
+    %link{href: "ico/apple-touch-icon-144x144.png", rel: "apple-touch-icon", sizes: "144x144"}
+    %link{href: "ico/apple-touch-icon-152x152.png", rel: "apple-touch-icon", sizes: "152x152"}
+    %link{:href => "/android-chrome-192x192.png", :rel => "icon", :sizes => "192x192", :type => "image/png"}/
+    %link{:href => "/favicon-96x96.png", :rel => "icon", :sizes => "96x96", :type => "image/png"}/
+    %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
+    %meta{content: "yes", name: "apple-mobile-web-app-capable"}
+    %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am  and fresh made sandwiches for lunch. Order online with pickup or delivery to Twin Lakes beach.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
-
-    %title Dekes
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
-    
     = csrf_meta_tags
-    / Prelang: Analytics / Google Analytics
     = analytics_init if Rails.env.production? or Rails.env.development?
   %body{:class => "#{controller_name} #{action_name}"}
     %nav.navbar-material.white{:role => "navigation"}
@@ -17,7 +30,9 @@
         = link_to image_tag("dekes-market-deli-logo.png"), root_url, id: "logo-container", class: "brand-logo center"
         - unless controller.controller_name == "registrations"
           %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
-            %h5 Add to Cart
+            %h5 
+              Order
+              = @products.first.menu.titleize
             - for product in @products
               %li
                 = link_to product.name, "#"

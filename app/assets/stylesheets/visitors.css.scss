@@ -6,7 +6,7 @@ $secondary-color: color("lime", "") !default;
 .navbar-material .nav-wrapper .brand-logo img {
   height: 64px;
 }
-
+.side-nav { h5 {padding: 0 16px; color: $primary-color;}  }
 nav ul a { color: $primary-color; }
 .parallax-container {
   min-height: 380px;
@@ -19,7 +19,7 @@ nav .button-collapse {height: 40px; text-align: center; margin-top: 8px; }
 .card { height: 400px;  }
 .card-media { overflow: hidden; height: 362px; position: relative;}
 .card .card-media img {
-max-height: 140%;
+height: 100%;
 width: auto;
 border-left: 50%;
 margin-left: -50%;
