@@ -21,7 +21,7 @@
     %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am  and fresh made sandwiches for lunch. Order online with pickup or delivery to Twin Lakes beach.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
-    = javascript_include_tag 'application', 'data-turbolinks-track' => true, async: true
+    = javascript_include_tag 'application'
     = csrf_meta_tags
     = analytics_init if Rails.env.production? or Rails.env.development?
   %body{:class => "#{controller_name} #{action_name}"}
@@ -35,13 +35,13 @@
               = @products.first.menu.titleize
             - for product in @products
               %li
-                =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb, no_turbolink: true)} do 
+                =link_to "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do 
                   %i.material-icons.small.waves-effect add-circle
                   =product.name
                   :plain
                     :
                   =product.price
-          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => "#", data: {no_turbolink: true}}
+          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
             Order
         %ul#nav-mobile.contact.right.hide-on-small-only
           %li.address
@@ -52,3 +52,4 @@
 
     :javascript
       $(".button-collapse").sideNav();
+      

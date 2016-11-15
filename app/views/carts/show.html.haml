@@ -10,7 +10,7 @@
               %span.title= product.name
               %p.product-price
                 = number_to_currency(product.price)
-              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb), no_turbolink: true}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
       .col.s12.m7#mycart
         %h3.center Basket
@@ -38,7 +38,7 @@
                 = product.name
               %p
                 = number_to_currency(product.price)
-              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb), no_turbolink: true}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
     
     .row
