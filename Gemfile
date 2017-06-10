@@ -66,4 +66,3 @@ gem 'google-analytics-rails'
 gem 'tzinfo-data'
 gem 'validates_formatting_of'
 
-ruby "2.2.5"
