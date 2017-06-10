@@ -20,6 +20,10 @@ default: &default
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
+  username: josh
+  password:
+  host: localhost
+
 
 development:
   <<: *default
@@ -79,7 +83,11 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: dekes_production
-  username: dekes
-  password: <%= ENV['DEKES_DATABASE_PASSWORD'] %>
+    <<: *default
+    adapter: postgresql
+    encoding: utf8
+    database: <%= ENV['RDS_DB_NAME'] %>
+    username: <%= ENV['RDS_USERNAME'] %>
+    password: <%= ENV['RDS_PASSWORD'] %>
+    host: <%= ENV['RDS_HOSTNAME'] %>
+    port: <%= ENV['RDS_PORT'] %>
