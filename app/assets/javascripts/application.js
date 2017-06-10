@@ -15,7 +15,7 @@
 //= require materialize-sprockets
 //= require_tree .
 
-$('.registrations').ready(function() {
+$('.carts').ready(function() {
   $.externalScript('https://js.stripe.com/v2/').done(function(script, textStatus) {
       Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'));
       var subscription = {

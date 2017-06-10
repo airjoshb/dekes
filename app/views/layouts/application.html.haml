@@ -2,26 +2,28 @@
 %html{itemscope: true, itemtype: content_for?(:html) ? yield(:html) : "http://schema.org/WebPage", lang: "en"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches and Catering in Santa Cruz - Deke's Market & Deli"
+    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches & Catering in Santa Cruz - Deke's Market & Deli"
     = favicon_link_tag 'ico/favicon.ico'
-    %link{href: "ico/apple-touch-icon.png", rel: "apple-touch-icon"}
-    %link{href: "ico/apple-touch-icon-57x57.png", rel: "apple-touch-icon", sizes: "57x57"}
-    %link{href: "ico/apple-touch-icon-60x60.png", rel: "apple-touch-icon", sizes: "60x60"}
-    %link{href: "ico/apple-touch-icon-72x72.png", rel: "apple-touch-icon", sizes: "72x72"}
-    %link{href: "ico/apple-touch-icon-76x76.png", rel: "apple-touch-icon", sizes: "76x76"}
-    %link{href: "ico/apple-touch-icon-114x114.png", rel: "apple-touch-icon", sizes: "114x114"}
-    %link{href: "ico/apple-touch-icon-120x120.png", rel: "apple-touch-icon", sizes: "120x120"}
-    %link{href: "ico/apple-touch-icon-144x144.png", rel: "apple-touch-icon", sizes: "144x144"}
-    %link{href: "ico/apple-touch-icon-152x152.png", rel: "apple-touch-icon", sizes: "152x152"}
-    %link{:href => "/android-chrome-192x192.png", :rel => "icon", :sizes => "192x192", :type => "image/png"}/
+    %link{href: "ico/apple-icon.png", rel: "apple-icon"}
+    %link{href: "ico/apple-icon-57x57.png", rel: "apple-icon", sizes: "57x57"}
+    %link{href: "ico/apple-icon-60x60.png", rel: "apple-icon", sizes: "60x60"}
+    %link{href: "ico/apple-icon-72x72.png", rel: "apple-icon", sizes: "72x72"}
+    %link{href: "ico/apple-icon-76x76.png", rel: "apple-icon", sizes: "76x76"}
+    %link{href: "ico/apple-icon-114x114.png", rel: "apple-icon", sizes: "114x114"}
+    %link{href: "ico/apple-icon-120x120.png", rel: "apple-icon", sizes: "120x120"}
+    %link{href: "ico/apple-icon-144x144.png", rel: "apple-icon", sizes: "144x144"}
+    %link{href: "ico/apple-icon-152x152.png", rel: "apple-icon", sizes: "152x152"}
+    %link{:href => "/android-192x192.png", :rel => "icon", :sizes => "192x192", :type => "image/png"}/
     %link{:href => "/favicon-96x96.png", :rel => "icon", :sizes => "96x96", :type => "image/png"}/
     %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
     %meta{content: "yes", name: "apple-mobile-web-app-capable"}
     %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am  and fresh made sandwiches for lunch. Order online with pickup or delivery to Twin Lakes beach.", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am and fresh made sandwiches for lunch. Order online with pickup close to Twin Lakes beach and the Santa Cruz Harbor.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
+    = tag :meta, name: "stripe-key", content: STRIPE_PUBLIC_KEY
+
     = csrf_meta_tags
     = analytics_init if Rails.env.production? or Rails.env.development?
   %body{:class => "#{controller_name} #{action_name}"}
@@ -41,6 +43,26 @@
                   :plain
                     :
                   =product.price
+            - if @snacks.present?
+              %h5 Snacks
+            - for snack in @snacks
+              %li
+                =link_to "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do 
+                  %i.material-icons.small.waves-effect add-circle
+                  =snack.name
+                  :plain
+                    :
+                  =snack.price
+            - if @drinks.present?
+              %h5 Drinks
+            - for drink in @drinks
+              %li
+                =link_to "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do 
+                  %i.material-icons.small.waves-effect add-circle
+                  =drink.name
+                  :plain
+                    :
+                  =drink.price
           %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
             Order
         %ul#nav-mobile.contact.right.hide-on-small-only
@@ -48,8 +70,30 @@
             %a 334 7th Ave, Santa Cruz
           %li.phone-number
             %a 831-476-5897 
+          -if @cart_items.present?
+            %li 
+              = link_to cart_path do
+                %i.material-icons.small.waves-effect shopping_basket
+            
     = yield
-
-    :javascript
-      $(".button-collapse").sideNav();
-      
+    %footer.blue.darken-3
+      .container
+        .row
+          .col.l8.s12
+            %span{itemprop: "name"}
+              %h4.white-text.logotype Deke's Market & In Mah' Belly Deli
+            %p.grey-text.text-lighten-4
+              334 7th Ave, Santa Cruz
+              %br
+              831-476-5897
+              %br
+              = mail_to "dekesmkt@gmail.com", "dekesmkt@gmail.com", class: "grey-text text-lighten-3"
+            
+             
+      .footer-copyright
+        .container.white-text.center{itemscope: true, itemtype: "http://schema.org/Organization"}
+          © 2017
+          Deke's Market
+  :javascript
+    $(".button-collapse").sideNav();
+    

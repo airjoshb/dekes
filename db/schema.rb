@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161112011430) do
+ActiveRecord::Schema.define(version: 20161229165554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,14 +76,13 @@ ActiveRecord::Schema.define(version: 20161112011430) do
   end
 
   create_table "line_items", force: :cascade do |t|
-    t.integer  "quantity"
-    t.decimal  "unit_price"
-    t.decimal  "line_price"
     t.integer  "sale_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "product_id"
   end
 
+  add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
   add_index "line_items", ["sale_id"], name: "index_line_items_on_sale_id", using: :btree
 
   create_table "products", force: :cascade do |t|
@@ -110,6 +109,7 @@ ActiveRecord::Schema.define(version: 20161112011430) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "cart_ids"
+    t.string   "email"
   end
 
   add_index "sales", ["fulfillment_option_id"], name: "index_sales_on_fulfillment_option_id", using: :btree

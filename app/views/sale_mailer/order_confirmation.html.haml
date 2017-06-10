@@ -1,0 +1,13 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h3 Order # #{@sale.guid}
+    %h2
+      Your sandwich order is ready! Come pick it up at 334 7th Ave.
+    %h4 Items
+    - for item in @sale.cart_ids.split(',')
+      - for item in Product.find(item)
+        %p= item.name
+    %h3 Total: #{number_to_currency(@sale.total)}

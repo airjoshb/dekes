@@ -1,3 +1,5 @@
+- content_for :head do
+  = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
 #cart.section
   .container
     .row
@@ -10,7 +12,25 @@
               %span.title= product.name
               %p.product-price
                 = number_to_currency(product.price)
-              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb), no_turbolink: true}, class: "secondary-content" do
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+          - for product in @snacks
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title
+                = product.name
+              %p
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+          - for product in @drinks
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title
+                = product.name
+              %p
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
       .col.s12.m7#mycart
         %h3.center Basket
@@ -38,7 +58,25 @@
                 = product.name
               %p
                 = number_to_currency(product.price)
-              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb), no_turbolink: true}, class: "secondary-content" do
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+          - for product in @snacks
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title
+                = product.name
+              %p
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
+                %i.material-icons.small.waves-effect shopping_basket
+          - for product in @drinks
+            %li.collection-item.avatar
+              = image_tag product.image.thumb, class: "circle"
+              %span.title
+                = product.name
+              %p
+                = number_to_currency(product.price)
+              =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
     
     .row
@@ -46,5 +84,6 @@
         - if @cart_line_items.present?
           .right
             = render 'subtotal', :locals => ( subtotal = @subtotal )
-            = link_to "Checkout", new_user_registration_path, class: "btn btn-large lime right", type: "button"
+            = form_tag sales_path do
+              = javascript_include_tag "https://checkout.stripe.com/checkout.js", class: "stripe-button waves-effect", "data-label": "Checkout", "data-amount": @subtotal * 100, "data-image" => "assets/apple-touch-icon-57x57.png", "data-key": STRIPE_PUBLIC_KEY,  "data-locale": "auto", "data-name": "Deke's Market & Deli"
       

@@ -10,18 +10,19 @@
         %h5.header.col.s12.light 
           The best sandwiches in Santa Cruz. 
       .row.center
-        = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime"
+        = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime darken-1 hoverable"
   .parallax
+    .screen
     = image_tag "dekes-sandwich-shop.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Deke's Sandwich Shop & Market"
 .container
   .section
     .row
       .col.s12.m4
         %h5.center Breakfast
-        %p Serving coffee and breakfast from 7 am until 11 am. Order online and pick up on your way to work. Slept in? Why wait, order and have it delivered in the Twin Lakes area.
+        %p Serving coffee and breakfast from 7 am until 11 am. Order online and pick up on your way to work. Slept in? Why wait, order and it'll be ready to go.
       .col.s12.m4
         %h5.center Lunch
-        %p Serving fresh made sandwiches for lunch from 11 am to 3 pm. Order online and get it delivered to Twin Lakes beach, or get notified when it is ready and come pick it up.
+        %p Serving fresh made sandwiches for lunch from 11 am to 3 pm. Order online and we'll have it ready in minutes. Get notified when it is ready and come pick it up.
       .col.s12.m4
         %h5.center Snacks & Drinks
         %p Why have just a sandwich? We've selected our most popular snacks and candy as well as drinks for all pick up and delivery orders.
@@ -30,8 +31,9 @@
     .container
       .row.center
         %h3.header.light.text-depth
-          Order online and pick up or have it delivered to the beach at Twin Lakes.
+          Don't lose out on beach time, order online and get a notification when it is ready.
   .parallax
+    .screen
     = image_tag "west-coast-reuben-sandwich.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Order sandwiches online."
 .container
   .section
@@ -54,7 +56,15 @@
           %br
           for groceries, wine and beer.
   .parallax
+    .screen
     = image_tag "groceries-beer-wine-twin-lakes-beach.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Groceries, beer and wine"         
+.container
+  .section
+    .row
+      .col.s12.m6.offset-m3
+        %h3.center Catering
+        %p Let us put together all the sandwiches, snacks and drinks you'll need for your event, get together, beach party at Twin Lakes Beach or a day on the boat in the Santa Cruz Harbor. Call us at 831-476-5897 and we'll get you set up.
+
 :javascript
   $(document).ready(function(){
     $('.parallax').parallax();

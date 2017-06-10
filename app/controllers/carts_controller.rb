@@ -1,16 +1,6 @@
 class CartsController < ApplicationController
 
   def show
-    cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->product_id','Id:*->price','Id:*->name','Id:*->image', '#' ])
-    @cart_line_items = cart_ids
-    @time = Time.now.in_time_zone("Pacific Time (US & Canada)")
-    @afternoon = @time.middle_of_day - 1.hours...@time.end_of_day - 6.hours
-    @evening = @time.middle_of_day + 6.hours...@time.end_of_day
-    if @time < @time.middle_of_day - 1.hours
-      @products = Product.breakfast
-    else @afternoon.cover?(@time)
-      @products = Product.lunch
-    end
     @subtotal = cart_total
     respond_to do |format|
       format.html #
@@ -37,6 +27,14 @@ class CartsController < ApplicationController
     total = 0
     price.map {|item| total += item.to_f }
     total
+  end
+  
+  def checkout
+    cart_ids = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->variation_id','Id:*->price','Id:*->name','Id:*->image', '#' ])
+    if cart_ids.present?
+      @line_items = cart_ids
+    end
+    @subtotal = cart_total
   end
 
   private

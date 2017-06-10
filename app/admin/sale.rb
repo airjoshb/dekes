@@ -1,5 +1,5 @@
 ActiveAdmin.register Sale do
-  permit_params :guid, :total, :status, :confirmation_sent, :note, :stripe_order_id
+  permit_params :guid, :total, :status, :confirmation_sent, :note, :stripe_order_id, :id, :email
 
 # See permitted parameters documentation:
 # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
@@ -13,6 +13,20 @@ ActiveAdmin.register Sale do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+  
+  member_action :complete_order, method: :get do
+    @sale = Sale.find(params[:id])
+    @sale.deliver_order_confirmation
+    @sale.complete!
+    redirect_to admin_sales_path, notice: "Customer notified for pickup"
+  end
+  
+  
+  action_item only: :show do
+    link_to 'Complete', complete_order_admin_sale_path(sale)
+  end
+
+
 
 
 end

@@ -5,6 +5,28 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :cart_items, :available_products
+   
+  def cart_items
+    @cart_items = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->price'])
+  end
+  
+  def available_products
+    cart_products = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->product_id','Id:*->price','Id:*->name','Id:*->image', '#' ])
+    @cart_line_items = cart_products
+    
+    @time = Time.now.in_time_zone("Pacific Time (US & Canada)")
+    @afternoon = @time.middle_of_day - 1.hours...@time.end_of_day - 6.hours
+    @evening = @time.middle_of_day + 6.hours...@time.end_of_day
+    if @time < @time.middle_of_day - 1.hours
+      @products = Product.breakfast
+    else @afternoon.cover?(@time)
+      @products = Product.lunch
+    end
+    @snacks = Product.snack
+    @drinks = Product.drink
+  end
+  
   protected
 
   #->Prelang (user_login:devise)
@@ -16,8 +38,14 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:account_update, keys: [:username, :email, :password, :password_confirmation, :remember_me,:address_id, address_attributes: [:address1, :address2, :city, :state, :zip, :id]])
   end
 
+ 
 
   private
+
+
+  def current_user_cart
+    "cart#{session[:session_id]}"
+  end
   
   #-> Prelang (user_login:devise)
   def require_user_signed_in

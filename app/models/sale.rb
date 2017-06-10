@@ -1,7 +1,7 @@
 class Sale < ActiveRecord::Base
   belongs_to :user
   belongs_to :fulfillment_option
-  has_many :line_items
+  has_many :line_items, autosave: :true
 
   validates_uniqueness_of :guid
 
@@ -9,19 +9,20 @@ class Sale < ActiveRecord::Base
 
   after_initialize  :populate_guid, :initialize_defaults
   before_save :create_line_items, :unless => Proc.new { |order| order.cart_ids.blank? }
-  before_save :get_total
-  before_save :charge_customer, :unless => Proc.new { |order| order.stripe_id.present? }
+  before_save :charge_customer, :unless => Proc.new { |order| order.stripe_order_id.present? }
   default_scope {order("Created_at DESC") }
 
 
-  def status_enum
-    ["new", "processing", "complete", "delivered"]
-  end
+  enum status: [:processing, :complete, :delivered]
 
   serialize :cart_ids
 
   def confirmed?
     self.confirmation_sent == true
+  end
+  
+  def send_order_email
+    OrderMailer.order_confirmation(self).deliver
   end
 
   def deliver_order_confirmation
@@ -31,7 +32,7 @@ class Sale < ActiveRecord::Base
 
   def initialize_defaults
     self.created_at ||= Time.now
-    self.status ||= "new"
+    self.processing!
     self.total ||= 0
   end
 
@@ -39,14 +40,9 @@ class Sale < ActiveRecord::Base
     if new_record?
       self.cart_ids.each do |node|
         product = Product.find(node)
-        line_item = LineItem.create do |li|
-          li.description = product.description,
-          li.name = product.name,
-          li.price = product.price,
-          li.guid = self.guid
-        end
-        self.line_items << line_item
+        line_item = self.line_items.build(product: product)
       end
+      self.line_items << line_items
     end
   end
 
@@ -71,7 +67,7 @@ class Sale < ActiveRecord::Base
         :currency => "usd",
         :customer => customer.id
       )
-      self.stripe_id = charge.id
+      self.stripe_order_id = charge.id
       self.status = "processing"
       self.email = self.user.email
     end

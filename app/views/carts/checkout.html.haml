@@ -1,0 +1,54 @@
+- content_for :head do
+  = tag :meta, :name => "stripe-key", :content => STRIPE_PUBLIC_KEY
+:css
+  .javascript-enabled{ display: none; }
+:javascript
+  $(document).ready(function() {
+    $('.javascript-enabled').show();
+  });
+
+#registration.section
+  .row
+    #stripe_error.alert.alert-error{:style => "display:none"}
+    .center
+      = link_to "Back to cart", cart_path
+
+    - if @line_items.blank?
+      .alert{ :class => "alert alert-error center" }
+        #flash_alert
+          Please add something to your cart to continue
+    - else
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {:class => 'card_form form-vertical' }) do |f|
+        .col.s12.m4
+          .card
+            .card-content
+              %span.card-title
+                Delivery Options
+              = select_tag 'fulfillment', options_from_collection_for_select(@delivery, :id, :name)
+        .col.s12.m4
+          .card
+            .card-content
+              = f.hidden_field :stripe_token
+              = f.error_notification
+              = display_base_errors resource
+              %h5 Enter Your Info
+              = f.input :name, :placeholder => "Name", :autofocus => true, label: false
+              = f.input :email, :placeholder => "Email", label: false 
+          .card
+            .card-content 
+              = render 'payment'
+              %noscript
+                You must enable javascript to check out     
+        .col.s12.m4
+          .card
+            .card-content
+              %span.card-title
+                Your Order
+              - for item in @line_items
+                = render 'sale', :item => item
+              %strong 
+                Total:
+                %span.right= number_to_currency(@subtotal)
+          = f.button :submit, 'Order', :class => 'btn btn-large pink-bgnd javascript-enabled'
+:javascript
+  $('#fulfillment').on('change', function(){ $.get('items_controller/' + $('#fulfillment').val()); }); 

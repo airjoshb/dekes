@@ -9,7 +9,9 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   resources :products
-  resources :sales
+  resources :sales, param: :guid do
+    get '/receipt', to: 'sales#receipt', as: :receipt
+  end
   root 'visitors#index'
 
   # Example of regular route:
@@ -67,6 +69,8 @@ Rails.application.routes.draw do
     put 'add/:product_id', to: 'carts#add', as: :add_to
     put 'remove/:item_id', to: 'carts#remove', as: :remove_from
   end
+  get 'checkout' => 'carts#checkout', as: :checkout
+  
   devise_scope :user do
     get    "login"   => "users/sessions#new",         as: :new_user_session
     post   "login"   => "users/sessions#create",      as: :user_session

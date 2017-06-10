@@ -6,6 +6,7 @@ $secondary-color: color("lime", "") !default;
 .navbar-material .nav-wrapper .brand-logo img {
   height: 64px;
 }
+.stripe-button-el span { font-size: 1.2em !important; font-family: sans-serif !important;  background: $primary-color !important; border-radius: 0px !important; border: none !important; box-shadow: none !important; height: auto !important; line-height: 50px !important; }
 .side-nav { h5 {padding: 0 16px; color: $primary-color;}  }
 nav ul a { color: $primary-color; }
 .parallax-container {
@@ -14,6 +15,15 @@ nav ul a { color: $primary-color; }
   height: auto;
   color: rgba(255, 255, 255, .9);
   .section {width: 100%;}
+}
+.screen { 
+  background-color: rgba(0,0,0,.3); 
+  z-index: 20; 
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
 }
 nav .button-collapse {height: 40px; text-align: center; margin-top: 8px; }
 .card { height: 400px;  }
