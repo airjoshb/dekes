@@ -2,7 +2,7 @@
 %html{itemscope: true, itemtype: content_for?(:html) ? yield(:html) : "http://schema.org/WebPage", lang: "en"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches & Catering in Santa Cruz - Deke's Market & Deli"
+    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches in Santa Cruz - Deke's Market & Deli"
     = favicon_link_tag 'ico/favicon.ico'
     %link{href: "/assets/apple-icon.png", rel: "apple-icon"}
     %link{href: "/assets/apple-icon-57x57.png", rel: "apple-icon", sizes: "57x57"}
@@ -18,7 +18,7 @@
     %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
     %meta{content: "yes", name: "apple-mobile-web-app-capable"}
     %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "Serving coffee and breakfast sandwiches from 6 am and fresh made sandwiches for lunch. Order online with pickup close to Twin Lakes beach and the Santa Cruz Harbor.", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "Order online and pick up near Twin Lakes Beach and the Santa Cruz Harbor! Serving coffee and breakfast sandwiches from 6 am and fresh made sandwiches for lunch.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
@@ -30,41 +30,42 @@
     %nav.navbar-material.white{:role => "navigation"}
       .nav-wrapper
         = link_to image_tag("dekes-market-deli-logo.png"), root_url, id: "logo-container", class: "brand-logo center"
-        - unless controller.controller_name == "registrations"
-          %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
-            %h5 
+        /
+          - unless controller.controller_name == "registrations"
+            %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
+              %h5 
+                Order
+                = @products.first.menu.titleize
+              - for product in @products
+                %li
+                  =link_to "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =product.name
+                    :plain
+                      :
+                    =product.price
+              - if @snacks.present?
+                %h5 Snacks
+              - for snack in @snacks
+                %li
+                  =link_to "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =snack.name
+                    :plain
+                      :
+                    =snack.price
+              - if @drinks.present?
+                %h5 Drinks
+              - for drink in @drinks
+                %li
+                  =link_to "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =drink.name
+                    :plain
+                      :
+                    =drink.price
+            %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
               Order
-              = @products.first.menu.titleize
-            - for product in @products
-              %li
-                =link_to "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do 
-                  %i.material-icons.small.waves-effect add-circle
-                  =product.name
-                  :plain
-                    :
-                  =product.price
-            - if @snacks.present?
-              %h5 Snacks
-            - for snack in @snacks
-              %li
-                =link_to "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do 
-                  %i.material-icons.small.waves-effect add-circle
-                  =snack.name
-                  :plain
-                    :
-                  =snack.price
-            - if @drinks.present?
-              %h5 Drinks
-            - for drink in @drinks
-              %li
-                =link_to "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do 
-                  %i.material-icons.small.waves-effect add-circle
-                  =drink.name
-                  :plain
-                    :
-                  =drink.price
-          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
-            Order
         %ul#nav-mobile.contact.right.hide-on-small-only
           %li.address
             %a 334 7th Ave, Santa Cruz
