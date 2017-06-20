@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
 
 
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :name, use: [:slugged, :finders]
   
   mount_uploader :image, ImageUploader
   
@@ -16,5 +16,6 @@ class Product < ActiveRecord::Base
   
   scope :morning, -> { where(menu: :breakfast) }
   scope :afternoon, -> { where(menu: :lunch) }
+  scope :food, -> { where(category: :food)}
   
 end

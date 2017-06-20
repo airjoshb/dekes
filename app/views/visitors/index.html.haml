@@ -7,7 +7,7 @@
           %br
           In Mah' Belly Deli
       .row.center
-        %h5.header.col.s12.light 
+        %h2.header.col.s12.light 
           The best sandwiches in Santa Cruz. 
       .row.center
         %p 334 7th Ave, Santa Cruz • 831-476-5897
@@ -28,6 +28,20 @@
       .col.s12.m4
         %h5.center Snacks & Drinks
         %p Why have just a sandwich? We've selected our most popular snacks and candy as well as drinks for all pick up orders.
+.container
+  .section
+    .row
+      - for product in @product
+        .col.s12.m4
+          =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
+            .card.z-depth-2.card-product.hoverable
+              .card-media
+                = image_tag product.image.hero
+                .card-data
+                  .card-title
+                    %h3.card-title-text= product.name
+                  %span.description= product.description
+
 .parallax-container.valign-wrapper
   .section.no-pad-bot
     .container

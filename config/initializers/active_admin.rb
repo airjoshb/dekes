@@ -179,6 +179,13 @@ ActiveAdmin.setup do |config|
   #
   # config.breadcrumb = false
 
+  # == Create Another Checkbox
+  #
+  # Create another checkbox is disabled by default. You can customize it for individual
+  # resources or you can enable them globally from here.
+  #
+  # config.create_another = true
+
   # == Register Stylesheets & Javascripts
   #
   # We recommend using the built in Active Admin layout and loading
@@ -269,5 +276,18 @@ ActiveAdmin.setup do |config|
   # of those filters by default here.
   #
   # config.include_default_association_filters = true
-  config.comments_registration_name = "AdminComment"
+
+  # == Footer
+  #
+  # By default, the footer shows the current Active Admin version. You can
+  # override the content of the footer here.
+  #
+  # config.footer = 'my custom footer text'
+
+  # == Sorting
+  #
+  # By default ActiveAdmin::OrderClause is used for sorting logic
+  # You can inherit it with own class and inject it for all resources
+  #
+  # config.order_clause = MyOrderClause
 end

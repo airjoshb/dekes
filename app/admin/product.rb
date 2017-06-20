@@ -1,13 +1,15 @@
 ActiveAdmin.register Product do
   permit_params :name, :menu, :description, :image, :price, :category
 
-  scope :all
+  config.sort_order = 'created_at_desc'
+  config.per_page = 10
+  
+  scope :all, default: true
 
   filter :name
   filter :created_at, label: "Created On"
   filter :menu, label: "Menu"
   filter :category, label: "Category"
-
 
   controller do
     def find_resource
