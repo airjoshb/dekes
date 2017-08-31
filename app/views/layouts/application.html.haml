@@ -2,7 +2,7 @@
 %html{itemscope: true, itemtype: content_for?(:html) ? yield(:html) : "http://schema.org/WebPage", lang: "en"}
   %head
     %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}
-    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches in Santa Cruz - Deke's Market & Deli"
+    %title= content_for?(:title) ? yield(:title) : "The Best Sandwiches and Breakfast Burritos in Santa Cruz - Deke's Market & Deli"
     = favicon_link_tag 'ico/favicon.ico'
     %link{href: "/assets/apple-icon.png", rel: "apple-icon"}
     %link{href: "/assets/apple-icon-57x57.png", rel: "apple-icon", sizes: "57x57"}
@@ -18,7 +18,7 @@
     %link{:href => "/favicon-16x16.png", :rel => "icon", :sizes => "16x16", :type => "image/png"}/
     %meta{content: "yes", name: "apple-mobile-web-app-capable"}
     %meta{content: "black", name: "apple-mobile-web-app-status-bar-style"}
-    %meta{:content => content_for?(:description) ? yield(:description) : "The best sandwiches in Santa Cruz, available to order online, near Twin Lakes Beach & Santa Cruz Harbor. Coffee and breakfast sandwiches from 6 am.", :name => "description"}
+    %meta{:content => content_for?(:description) ? yield(:description) : "The best sandwiches and now breakfast burritos in Santa Cruz, available to order online (coming soon), near Twin Lakes Beach & Santa Cruz Harbor. Coffee and breakfast sandwiches and burritos from 6 am.", :name => "description"}
     %link{:href => "https://fonts.googleapis.com/icon?family=Material+Icons", :rel => "stylesheet"}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application'
