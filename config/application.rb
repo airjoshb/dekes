@@ -21,7 +21,8 @@ module Dekes
     # config.i18n.default_locale = :de
     
     config.time_zone = 'Pacific Time (US & Canada)'
-      
+    require 'carrierwave/orm/activerecord'
+
     
     config.assets.paths << Rails.root.join('app', 'assets', 'fonts', 'ico')
   end

@@ -1,6 +1,9 @@
 .section
   .container
     .row
+      %h5 
+        Order
+        = @products.first.menu.titleize
       - for product in @products
         .col.s12.m4
           =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
@@ -17,6 +20,8 @@
                 %a.waves-effect.lime
                 %i.material-icons.small.waves-effect shopping_basket
     .row
+      %h5 
+        = @snacks.first.category.titleize.pluralize
       - for snack in @snacks
         .col.s12.m4
           =link_to "", class: "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do
@@ -32,6 +37,9 @@
                   = number_to_currency(snack.price)
                 %a.waves-effect.lime
                 %i.material-icons.small.waves-effect shopping_basket
+    .row
+      %h5 
+        = @drinks.first.category.titleize.pluralize
       - for drink in @drinks
         .col.s12.m4
           =link_to "", class: "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do

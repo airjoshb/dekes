@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
   before_action :cart_items, :available_products
+  helper_method :open_for_business
    
   def cart_items
     @cart_items = REDIS.sort(current_user_cart, :by => 'NOSORT', :get => ['Id:*->price'])
@@ -26,6 +27,13 @@ class ApplicationController < ActionController::Base
     @snacks = Product.snack
     @drinks = Product.drink
   end
+  
+  def open_for_business
+    t1 = Time.zone.parse("9am")
+    t2 = Time.zone.parse("4pm")
+    Time.zone.now.between?(t1, t2)
+  end
+
   
   protected
 
