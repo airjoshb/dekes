@@ -10,9 +10,11 @@
         %h2.header.col.s12.light 
           The best sandwiches in Santa Cruz. 
       .row.center
+        = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime darken-1 hoverable"
+        
+      .row.center
         %p 334 7th Ave, Santa Cruz • 831-476-5897
-        /
-          = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime darken-1 hoverable"
+
   .parallax
     .screen
     = image_tag "dekes-sandwich-shop.jpg", style: "display: block; transform: translate3d(-50%, 212px, 0px);", alt: "Deke's Sandwich Shop & Market"
