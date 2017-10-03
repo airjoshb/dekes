@@ -7,7 +7,8 @@ class Sale < ActiveRecord::Base
 
   accepts_nested_attributes_for :line_items, allow_destroy: true
 
-  after_initialize  :populate_guid, :initialize_defaults
+  after_initialize  :populate_guid, if: Proc.new { |p| p.guid.blank? }
+  after_initialize :initialize_defaults, if: Proc.new { |p| p.total.blank? }
   before_save :create_line_items, :unless => Proc.new { |order| order.cart_ids.blank? }
   before_save :charge_customer, :unless => Proc.new { |order| order.stripe_order_id.present? }
   default_scope {order("Created_at DESC") }
