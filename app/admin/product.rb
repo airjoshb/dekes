@@ -12,6 +12,8 @@ ActiveAdmin.register Product do
   filter :category, label: "Category"
 
   controller do
+    skip_before_action :cart_items, :available_products
+
     def find_resource
       scoped_collection.friendly.find(params[:id])
     end

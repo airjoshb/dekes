@@ -4,7 +4,7 @@ class OrderMailer < ActionMailer::Base
 
   def order_confirmation(sale)
     @sale = sale
-    mail(:to => @sale.email, :subject => "You've got a web order")
+    mail(:to => "dekesmkt@gmail.com", :subject => "You've got a web order")
   end
 
 
