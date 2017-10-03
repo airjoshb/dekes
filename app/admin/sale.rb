@@ -14,6 +14,23 @@ ActiveAdmin.register Sale do
 #   permitted
 # end
   
+  index do
+    selectable_column
+    column "Sale" do |sale|
+      link_to sale.guid, admin_sale_path(sale)
+    end
+    column :created_at, label: "Created"
+    column :total
+    column :status
+    column :confirmation_sent
+    column :stripe_order_id
+    column :email
+    column "line items" do |li|
+      li.line_items.map{|p| p.product.name}.join(',')
+    end
+    actions
+  end
+  
   member_action :complete_order, method: :get do
     @sale = Sale.find(params[:id])
     @sale.deliver_order_confirmation

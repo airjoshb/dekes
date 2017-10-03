@@ -18,7 +18,7 @@ ActiveAdmin.register_page "Dashboard" do
             column :email
             column :stripe_order_id
             column "line items" do |li|
-              li.line_items.map{|p| p.product.name}
+              li.line_items.map{|p| p.product.name}.join(',')
             end
           end
         end
