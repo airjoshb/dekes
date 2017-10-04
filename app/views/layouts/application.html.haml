@@ -32,7 +32,7 @@
         = link_to image_tag("dekes-market-deli-logo.png"), root_url, id: "logo-container", class: "brand-logo center"
         - unless controller.controller_name == "registrations"
           %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
-            - if !open_for_business
+            - if open_for_business
               %h5 
                 Order
                 = @products.first.menu.titleize
