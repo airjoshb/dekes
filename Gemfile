@@ -58,7 +58,7 @@ gem 'rails_12factor', group: :production
 
 gem 'bundler'
 
-gem 'activeadmin', github: 'activeadmin'
+gem 'activeadmin'
 gem 'devise', github: 'plataformatec/devise'
 gem 'omniauth'
 gem 'omniauth-facebook'

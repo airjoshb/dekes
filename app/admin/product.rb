@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :menu, :description, :image, :price, :category
+  permit_params :name, :menu, :description, :image, :price, :category, :available
 
   config.sort_order = 'created_at_desc'
   config.per_page = 10
