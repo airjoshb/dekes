@@ -17,5 +17,6 @@ class Product < ActiveRecord::Base
   scope :morning, -> { where(menu: :breakfast) }
   scope :afternoon, -> { where(menu: :lunch) }
   scope :food, -> { where(category: :food)}
+  scope :available, -> {where(available: true)}
   
 end

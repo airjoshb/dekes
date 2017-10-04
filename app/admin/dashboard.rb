@@ -7,24 +7,29 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     #
+
+  
+
     columns do
       column do
         panel "Active Sales" do
           table_for Sale.processing.each do |sale|
             column :created_at
-            column (:guid) {|g| link_to(g.guid, admin_sale_path(g)) }
-            column :total
-            column :status             
-            column :email
-            column :stripe_order_id
-            column "line items" do |li|
+            column ("Order ID") {|g| link_to(g.guid, admin_sale_path(g)) }
+            column "Ordered Items" do |li|
               li.line_items.map{|p| p.product.name}.join(',')
             end
+            column :total
+            column :email
+            column ("") do |sale|
+              link_to 'Complete', complete_order_admin_sale_path(sale), class: "button"  
+            end  
           end
         end
       end
     end
-
+    
+    
     #   column do
     #     panel "Info" do
     #       para "Welcome to ActiveAdmin."

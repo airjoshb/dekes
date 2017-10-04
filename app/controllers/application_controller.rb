@@ -20,9 +20,9 @@ class ApplicationController < ActionController::Base
     @afternoon = @time.middle_of_day - 1.hours...@time.end_of_day - 6.hours
     @evening = @time.middle_of_day + 6.hours...@time.end_of_day
     if @time < @time.middle_of_day - 1.hours
-      @products = Product.breakfast
+      @products = Product.breakfast.available
     else @afternoon.cover?(@time)
-      @products = Product.lunch
+      @products = Product.lunch.available
     end
     @snacks = Product.snack
     @drinks = Product.drink

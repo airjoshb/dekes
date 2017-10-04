@@ -35,7 +35,7 @@ ActiveAdmin.register Sale do
     @sale = Sale.find(params[:id])
     @sale.deliver_order_confirmation
     @sale.complete!
-    redirect_to admin_sales_path, notice: "Customer notified for pickup"
+    redirect_to admin_dashboard_path, notice: "Customer notified for pickup"
   end
   
   

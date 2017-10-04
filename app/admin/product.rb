@@ -24,11 +24,19 @@ ActiveAdmin.register Product do
     column "Product" do |product|
       link_to product.name, admin_product_path(product)
     end
-    column :created_at, label: "Created"
     column :price
     column :menu, label: "Menu"
     column :category, label: "Category"
+    column "Availability" do |product|
+      if product.available?
+        link_to 'Mark Unavailable', mark_unavailable_admin_product_path(product), class: "button"
+      else
+        link_to 'Mark Available', mark_available_admin_product_path(product), class: "button"
+
+      end
+    end
     actions
+
   end
 
 
@@ -44,6 +52,19 @@ ActiveAdmin.register Product do
     end
     f.actions
   end
+  
+  member_action :mark_available, method: :get do
+    @product = Product.find(params[:id])
+    @product.update_column(:available, true)
+    redirect_to admin_products_path, notice: "Product Marked Available"
+  end
+  
+  member_action :mark_unavailable, method: :get do
+    @product = Product.find(params[:id])
+    @product.update_column(:available, false)
+    redirect_to admin_products_path, notice: "Product Marked Unavailable"
+  end
+  
 
 
 end
