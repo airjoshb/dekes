@@ -19,39 +19,41 @@
                   = number_to_currency(product.price)
                 %a.waves-effect.lime
                 %i.material-icons.small.waves-effect shopping_basket
-    .row
-      %h5 
-        = @snacks.first.category.titleize.pluralize
-      - for snack in @snacks
-        .col.s12.m4
-          =link_to "", class: "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do
-            .card.z-depth-2.card-product.hoverable
-              .card-media
-                = image_tag snack.image.hero
-                .card-data
-                  .card-title
-                    %h3.card-title-text= snack.name
-                  %span.description= snack.description
-              .card-actions
-                %strong.product-price
-                  = number_to_currency(snack.price)
-                %a.waves-effect.lime
-                %i.material-icons.small.waves-effect shopping_basket
-    .row
-      %h5 
-        = @drinks.first.category.titleize.pluralize
-      - for drink in @drinks
-        .col.s12.m4
-          =link_to "", class: "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do
-            .card.z-depth-2.card-product.hoverable
-              .card-media
-                = image_tag drink.image.hero
-                .card-data
-                  .card-title
-                    %h3.card-title-text= drink.name
-                  %span.description= drink.description
-              .card-actions
-                %strong.product-price
-                  = number_to_currency(drink.price)
-                %a.waves-effect.lime
-                %i.material-icons.small.waves-effect shopping_basket
+    - unless @snacks.empty?
+      .row
+        %h5 
+          = @snacks.first.category.titleize.pluralize
+        - for snack in @snacks
+          .col.s12.m4
+            =link_to "", class: "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do
+              .card.z-depth-2.card-product.hoverable
+                .card-media
+                  = image_tag snack.image.hero
+                  .card-data
+                    .card-title
+                      %h3.card-title-text= snack.name
+                    %span.description= snack.description
+                .card-actions
+                  %strong.product-price
+                    = number_to_currency(snack.price)
+                  %a.waves-effect.lime
+                  %i.material-icons.small.waves-effect shopping_basket
+    - unless @drinks.empty?
+      .row
+        %h5 
+          = @drinks.first.category.titleize.pluralize
+        - for drink in @drinks
+          .col.s12.m4
+            =link_to "", class: "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do
+              .card.z-depth-2.card-product.hoverable
+                .card-media
+                  = image_tag drink.image.hero
+                  .card-data
+                    .card-title
+                      %h3.card-title-text= drink.name
+                    %span.description= drink.description
+                .card-actions
+                  %strong.product-price
+                    = number_to_currency(drink.price)
+                  %a.waves-effect.lime
+                  %i.material-icons.small.waves-effect shopping_basket
