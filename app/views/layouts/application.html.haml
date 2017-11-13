@@ -30,45 +30,44 @@
     %nav.navbar-material.white{:role => "navigation"}
       .nav-wrapper
         = link_to image_tag("dekes-market-deli-logo.png"), root_url, id: "logo-container", class: "brand-logo center"
-        /
-          - unless controller.controller_name == "registrations"
-            %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
-              - if open_for_business
-                %h5 
-                  Order
-                  = @products.first.menu.titleize
-                - for product in @products
-                  %li
-                    =link_to "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do 
-                      %i.material-icons.small.waves-effect add-circle
-                      =product.name
-                      :plain
-                        :
-                      =product.price
-                - if @snacks.present?
-                  %h5 Snacks
-                - for snack in @snacks
-                  %li
-                    =link_to "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do 
-                      %i.material-icons.small.waves-effect add-circle
-                      =snack.name
-                      :plain
-                        :
-                      =snack.price
-                - if @drinks.present?
-                  %h5 Drinks
-                - for drink in @drinks
-                  %li
-                    =link_to "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do 
-                      %i.material-icons.small.waves-effect add-circle
-                      =drink.name
-                      :plain
-                        :
-                      =drink.price
-              -else
-                %h5.center Online ordering is available between 9am and 4pm
-            %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
-              Order
+        - unless controller.controller_name == "registrations"
+          %ul#nav-mobile.side-nav{:style => "transform: translateX(-100%);"}
+            - if open_for_business
+              %h5 
+                Order
+                = @products.first.menu.titleize
+              - for product in @products
+                %li
+                  =link_to "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =product.name
+                    :plain
+                      :
+                    =product.price
+              - if @snacks.present?
+                %h5 Snacks
+              - for snack in @snacks
+                %li
+                  =link_to "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =snack.name
+                    :plain
+                      :
+                    =snack.price
+              - if @drinks.present?
+                %h5 Drinks
+              - for drink in @drinks
+                %li
+                  =link_to "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do 
+                    %i.material-icons.small.waves-effect add-circle
+                    =drink.name
+                    :plain
+                      :
+                    =drink.price
+            -else
+              %h5.center Online ordering is available between 9am and 4pm
+          %a#download-button.button-collapse.btn-floating.waves-effect.lime{"data-activates" => "nav-mobile", :href => ""}
+            Order
         %ul#nav-mobile.contact.right.hide-on-small-only
           %li.address
             %a 334 7th Ave, Santa Cruz

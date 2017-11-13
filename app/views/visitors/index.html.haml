@@ -9,16 +9,15 @@
       .row.center
         %h2.header.col.s12.light 
           The best sandwiches in Santa Cruz. 
-      /
-        - if open_for_business
-          .row.center
-            = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime darken-1 hoverable"
-        - else
-          .row.center
-            .btn-large.waves-effect.disabled
-              Order Now
-          .row.center
-            %strong Order online between 9am and 4pm
+      - if open_for_business
+        .row.center
+          = link_to "Order Now", products_path, id: "download-button", class: "btn-large waves-effect lime darken-1 hoverable"
+      - else
+        .row.center
+          .btn-large.waves-effect.disabled
+            Order Now
+        .row.center
+          %strong Order online between 9am and 4pm
 
         
       .row.center
