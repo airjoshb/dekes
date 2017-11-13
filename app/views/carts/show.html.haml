@@ -48,6 +48,10 @@
                 .secondary-content
                   = link_to "", data: { targetUrl: remove_from_cart_path(item.last)}, id: item.last, class: "remove" do
                     %i.material-icons close
+          .right
+            = render 'subtotal', :locals => ( subtotal = @subtotal )
+            = form_tag sales_path do
+              = javascript_include_tag "https://checkout.stripe.com/checkout.js", class: "stripe-button waves-effect", "data-label": "Checkout", "data-amount": @subtotal * 100, "data-image" => "/assets/apple-touch-icon-57x57.png", "data-key": STRIPE_PUBLIC_KEY,  "data-locale": "auto", "data-name": "Deke's Market & Deli"
       .col.s12.m5.lime.lighten-5.hide-on-med-and-up
         %h5.center Add More
         %ul.collection
@@ -79,11 +83,5 @@
               =link_to "", data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)}, class: "secondary-content" do
                 %i.material-icons.small.waves-effect shopping_basket
     
-    .row
-      .col.s12.m3.right
-        - if @cart_line_items.present?
-          .right
-            = render 'subtotal', :locals => ( subtotal = @subtotal )
-            = form_tag sales_path do
-              = javascript_include_tag "https://checkout.stripe.com/checkout.js", class: "stripe-button waves-effect", "data-label": "Checkout", "data-amount": @subtotal * 100, "data-image" => "/assets/apple-touch-icon-57x57.png", "data-key": STRIPE_PUBLIC_KEY,  "data-locale": "auto", "data-name": "Deke's Market & Deli"
+        
       
