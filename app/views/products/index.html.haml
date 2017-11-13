@@ -5,17 +5,20 @@
         Order
         = @products.first.menu.titleize
       - for product in @products
-        .col.s12.m4
+        .col.s12.m4{itemscope: true, itemtype: "http://data-vocabulary.org/Product"} 
+
           =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
             .card.z-depth-2.card-product.hoverable
-              .card-media
+              .card-media{itemprop: "image"}
                 = image_tag product.image.hero
                 .card-data
                   .card-title
-                    %h3.card-title-text= product.name
-                  %span.description= product.description
-              .card-actions
-                %strong.product-price
+                    %h3.card-title-text{itemprop: "name"}= product.name
+                  %span.description{itemprop: "description"}= product.description
+              .card-actions{itemprop: "offerDetails", itemscope: "", itemtype: "http://data-vocabulary.org/Offer"}
+                %meta{content: "in_stock", itemprop: "availability"}
+                %meta{itemprop: "currency", content: "USD"}
+                %strong.product-price{itemprop: "price", content: number_to_currency(product.price)} 
                   = number_to_currency(product.price)
                 %a.waves-effect.lime
                 %i.material-icons.small.waves-effect shopping_basket
