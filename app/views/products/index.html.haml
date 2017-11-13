@@ -7,7 +7,7 @@
       - for product in @products
         .col.s12.m4{itemscope: true, itemtype: "http://data-vocabulary.org/Product"} 
 
-          =link_to "", class: "", role: 'button', data: {target: product, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
+          =link_to "", class: "", role: 'button', data: {target: product.id, addUrl: add_to_cart_path(:product_id => product.id, :price => product.price, :name => product.name, :image => product.image.thumb)} do
             .card.z-depth-2.card-product.hoverable
               .card-media{itemprop: "image"}
                 = image_tag product.image.hero
@@ -28,7 +28,7 @@
           = @snacks.first.category.titleize.pluralize
         - for snack in @snacks
           .col.s12.m4
-            =link_to "", class: "", role: 'button', data: {target: snack, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do
+            =link_to "", class: "", role: 'button', data: {target: snack.id, addUrl: add_to_cart_path(:product_id => snack.id, :price => snack.price, :name => snack.name, :image => snack.image.thumb)} do
               .card.z-depth-2.card-product.hoverable
                 .card-media
                   = image_tag snack.image.hero
@@ -47,7 +47,7 @@
           = @drinks.first.category.titleize.pluralize
         - for drink in @drinks
           .col.s12.m4
-            =link_to "", class: "", role: 'button', data: {target: drink, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do
+            =link_to "", class: "", role: 'button', data: {target: drink.id, addUrl: add_to_cart_path(:product_id => drink.id, :price => drink.price, :name => drink.name, :image => drink.image.thumb)} do
               .card.z-depth-2.card-product.hoverable
                 .card-media
                   = image_tag drink.image.hero
