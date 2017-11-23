@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
   def open_for_business
     t1 = Time.zone.parse("9am")
     t2 = Time.zone.parse("3:45pm")
-    Time.zone.now.between?(t1, t2)
+    Time.zone.now.between?(t1, t2) && Date.today != ("November 23" || "December 25")
   end
 
   
