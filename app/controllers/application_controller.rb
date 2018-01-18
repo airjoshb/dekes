@@ -17,11 +17,12 @@ class ApplicationController < ActionController::Base
     @cart_line_items = cart_products
     
     @time = Time.now.in_time_zone("Pacific Time (US & Canada)")
-    @afternoon = @time.middle_of_day - 1.hours...@time.end_of_day - 6.hours
-    @evening = @time.middle_of_day + 6.hours...@time.end_of_day
-    if @time < @time.middle_of_day - 1.hours
+    @morning = Time.zone.parse("9am")
+    @afternoon = Time.zone.parse("11am")
+    @close = Time.zone.parse("4pm")
+    if @time.between?(@morning, @afternoon)
       @products = Product.breakfast.available
-    else @afternoon.cover?(@time)
+    else @time >= @afternoon
       @products = Product.lunch.available
     end
     @snacks = Product.snack
@@ -30,7 +31,7 @@ class ApplicationController < ActionController::Base
   
   def open_for_business
     t1 = Time.zone.parse("9am")
-    t2 = Time.zone.parse("3:45pm")
+    t2 = Time.zone.parse("4pm")
     Time.zone.now.between?(t1, t2) && Time.now.to_date != DateTime.parse("Dec 25, 2017")
   end
 
