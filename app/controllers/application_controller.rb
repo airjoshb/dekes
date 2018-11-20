@@ -28,11 +28,18 @@ class ApplicationController < ActionController::Base
     @snacks = Product.snack
     @drinks = Product.drink
   end
+
+  def thanksgiving_for_every_year(year)
+    Date.new(year, 11, -1).downto(0).find(&:thursday?)
+  end
   
   def open_for_business
     t1 = Time.zone.parse("9am")
-    t2 = Time.zone.parse("4pm")
-    Time.zone.now.between?(t1, t2) && Time.now.to_date != DateTime.parse("Dec 25, 2017")
+    t2 = Time.zone.parse("6pm")
+    christmas = DateTime.parse("Dec 25, 2018")
+    thanksgiving =  DateTime.parse("Nov 22, 2018")
+    holidays = christmas, thanksgiving
+    Time.zone.now.between?(t1, t2) && !holidays.include?(Time.now.to_date)
   end
 
   
