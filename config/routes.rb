@@ -82,6 +82,6 @@ Rails.application.routes.draw do
     get    "account" => "users/registrations#edit",   as: :edit_user_registration
   end
   
-  mount_griddler
+  # mount_griddler
 
 end

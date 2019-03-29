@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7'
+gem 'rails', '4.2.8'
 ruby "~> 2.4.5"
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 gem 'materialize-sass'
@@ -24,8 +24,6 @@ gem 'haml-rails'
 gem 'friendly_id', '~> 5.1.0'
 gem 'geocoder'
 gem 'geoip'
-gem 'griddler'
-gem 'griddler-sendgrid'
 gem 'simple_form'
 gem 'cocoon'
 
