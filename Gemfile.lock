@@ -306,7 +306,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   jquery-turbolinks
-  materialize-sass
+  materialize-sass (~> 1.0.0)
   mini_magick
   omniauth
   omniauth-facebook
