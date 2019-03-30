@@ -10,10 +10,10 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery2
 //= require jquery_ujs
 //= require materialize
-//= require_tree .
+//= require jquery.externalscript
 
 $('.carts').ready(function() {
   $.externalScript('https://js.stripe.com/v2/').done(function(script, textStatus) {
