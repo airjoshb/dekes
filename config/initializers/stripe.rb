@@ -1,10 +1,7 @@
-if(Rails.env == 'development')
-  Stripe.api_key = ENV["STRIPE_TEST_API_KEY"]
-  STRIPE_PUBLIC_KEY = ENV["STRIPE_TEST_PUBLIC_KEY"]
-elsif(Rails.env == 'production')
-  Stripe.api_key = ENV["STRIPE_API_KEY"]
-  STRIPE_PUBLIC_KEY = ENV["STRIPE_PUBLIC_KEY"]
-end
+
+Stripe.api_key = Rails.application.secrets.stripe_api_key
+STRIPE_PUBLIC_KEY = Rails.application.secrets.stripe_public_key
+
 StripeEvent.configure do |events|
   events.subscribe 'customer.subscription.deleted' do |event|
     user = User.find_by_customer_id(event.data.object.customer)

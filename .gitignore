@@ -14,10 +14,8 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-/config/secrets.yml
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
-
-
+config/secrets.yml

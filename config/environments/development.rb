@@ -34,7 +34,7 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
-  # ENV["REDISTOGO_URL"] = 'redis://127.0.0.1:6379'
+  ENV["REDISTOGO_URL"] = 'redis://redistogo:27fcb4dcac96472c0c30ae55543853d9@lab.redistogo.com:9472'
 
 
   config.action_mailer.smtp_settings = {
