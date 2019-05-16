@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     christmas = DateTime.parse("Dec 25, 2018")
     thanksgiving =  DateTime.parse("Nov 22, 2018")
     holidays = christmas, thanksgiving
-    Time.zone.now.between?(t1, t2) && !holidays.include?(Time.now.to_date)
+    Time.zone.now.between?(t1, t2) && !holidays.include?(Time.now.to_date) && !available_products.blank?
   end
 
   
